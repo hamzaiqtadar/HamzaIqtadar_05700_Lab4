@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>AERO FIGHTER</title>
+	<link rel="stylesheet" href="style.css" type="text/css" >
+	<script type="text/javascript">
+		function keypressed(event){
+		switch (event.keyCode) {
+                    case 38:
+                        up();
+                    break;
+
+                    case 40:
+                        down();
+                    break;
+                }
+		}
+		function up(){
+		var element1=document.getElementById("pln");
+                element1.style.top=parseInt(element1.style.left)+50+'px';
+		}
+		function down(){
+		var element1=document.getElementById("pln");
+                element1.style.top=parseInt(element1.style.left)+450+'px';
+		}
+		function moveufo(){
+		var element1=document.getElementById("ship1");
+		var x=parseInt(element1.style.left);		
+		var element2=document.getElementById("pln");
+		var y=parseInt(element2.style.left);
+		var element3=document.getElementById("ship1");
+		var a=parseInt(element3.style.top);		
+		var element4=document.getElementById("pln");
+		var b=parseInt(element4.style.top);
+		if((x==y && a==b) || (a==b &&( (x-y)<250 ))){
+		alert("You Lost");
+		location.reload();
+		}
+		else{
+		element1.style.left=parseInt(element1.style.left)-Math.floor((Math.random()*10)+1)+'px';
+		}
+		}
+		function moveufo2(){
+		var element1=document.getElementById("ship2");
+		element1.style.left=parseInt(element1.style.left)-Math.floor((Math.random()*10)+1)+'px';
+		}
+		function loop1(){
+		var element1=document.getElementById("ship1");
+		var x=parseInt(element1.style.left);
+		if(x > -500)
+		{
+			moveufo();
+			setTimeout("loop1()",10);
+		}
+		else 
+		{
+			element1.style.left=1100+'px';
+			loop1();
+		}
+		}
+		function loop2(){
+		var element1=document.getElementById("ship2");
+		var x=parseInt(element1.style.left);
+		if(x > -500)
+		{
+			moveufo2();
+			setTimeout("loop2()",10);
+		}
+		else 
+		{
+			element1.style.left=1100+'px';
+			loop2();
+		}
+		}
+		function loop(){
+		loop1();
+		loop2();
+		}
+
+	</script>
+</head>
+
+<body onload="loop();" onkeydown="keypressed(event)"  onkeyup=""  >
+
+<div id="ins" align="center">
+Use 'up' & 'down' keys to move plane up and down.
+</div>
+
+<div id="jet">
+<img id="pln" src="plane.png" style="position: absolute; left: 15px; right: 15px; top: 50px; bottom: auto; " height="150" width="300"></img>
+<img id="ship1" src="ufo.png" style="position: absolute; left: 600px; right: 15px; top: 50px; bottom: auto;" height="100" width="230"></img>
+<img id="ship2" src="ufo.png" style="position: absolute; left: 1100px; right: 15px; top: 450px; bottom: auto;" height="100" width="230"></img>
+</div>
+
+</body>
+</html>
